@@ -7,3 +7,9 @@ Basic example to understand React
 ```
 npx browser-sync start --server --files "./*.html" --no-notify --directory
 ```
+
+## create-react-app
+
+```
+npx create-react-app twitter-react
+```
