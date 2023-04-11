@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="root"></div>
+</body>
+<script
+    crossorigin    
+    src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script
+    crossorigin
+    src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script
+    crossorigin
+    src="https://unpkg.com/@babel/standalone@7.8.3/babel.min.js"
+></script>
+<script type="text/babel">
+    const rootElement = document.getElementById('root');
+    
+    const getChildren = () => "Hello World!!";
+    const childClass = 'child';
+    //const span = <span className={childClass}>{getChildren()}</span>;
+    const properties = {
+        className: childClass,
+        id: 'span-id'
+    };
+    const span = (
+        <span {...properties}>
+            {/* Comment */}
+            {getChildren()}
+            {'Goodbye'}
+            {5}
+            {5+2}
+            {``}
+            {null}
+            {undefined}
+            {true}
+            {false}
+            {'true'}
+            {JSON.stringify({a: 1, b:2})}
+            {//{{a:1, b:2}}
+            }
+            
+            {true ? 2 : 3}
+            {4 < 5 && 'minor'}
+            {4 > 5 && 'minor'}
+
+            {4 < 5 || 'minor'}
+            {4 > 5 || 'minor'}
+
+        </span>
+    ) 
+    const element = (
+        <div className ="container" id="id" children="Hola">
+            {span}
+        </div>
+    );
+    /*const element = React.createElement('div', {
+        className: 'container',
+        children: 'Hello World!!',
+        id: "id",
+        style: {
+            color: 'red'
+        }
+    },
+    'Hello World!!!',
+    'Goodbay World',
+    );
+    */
+    console.log(element);
+    ReactDOM.createRoot(rootElement).render(element)
+
+</script>
+</html>
