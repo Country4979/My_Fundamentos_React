@@ -29,37 +29,21 @@
         console.log(props);
         return <span className="message">{props.children}</span>
     }*/
-    const Message = ({ children, name, ... props }) => {
-        //... props(o como lo quiera llamar) "deja pasar" a otros elementos más abajo que no se van a utilizar en esta función, menos children y name, que los voy a usa.
-
-        /*Sin destructuring, habría que hacerlo así, recibiendo como parámetro props
-        const children = props.children
-        const name = props.name
-            Y mejor aún: const {hildren, name} = props
-        */
+    const Message = ({ children, name }) => {
         return (
             <span className="message">
             {children}-{name}
             </span>
         );
     }
-    /*
-    function message(text){
-        return <span className="message">{text}</span>
-    }
-    */
 
     const element =
         <div className ="container">
-            {/*message("Hello World!!")*/}
-            <Message name="Javi">
-                <div>Hello!!</div>
-            </Message>
-            {/*message("Goodbye World")*/}
+            <Message name="Javi">Hello!!</Message>
             <Message name ="Javi">Goodbye!!</Message>
         </div>;
     
-    console.log(element);
+    console.log('element', element);
     ReactDOM.createRoot(rootElement).render(element);
 </script>
 </html>
