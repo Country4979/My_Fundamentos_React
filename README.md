@@ -2,7 +2,7 @@
 
 Basic example to understand React
 
-## How tor run
+## How to run
 
 ```
 npx browser-sync start --server --files "./*.html" --no-notify --directory

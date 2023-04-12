@@ -1,0 +1,11 @@
+.tweetsPage {
+    color: red;
+}
+
+.tweetsPage.light {
+    background-color: lightblue;
+}
+
+.tweetsPage.dark {
+    background-color: darkblue;
+}
