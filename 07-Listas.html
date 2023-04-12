@@ -23,16 +23,11 @@
     const rootElement = document.getElementById('root');
     const reactRoot = ReactDOM.createRoot(rootElement); //Sacamos el create fuera pq react se queja si lo estamos creando continuamente
 
-    function tick() {
-        const now = new Date().toLocaleTimeString() //Obtener la hora
-        const clock = <div><span className="clock">{now}</span></div>   //Pintará el reloj
-        
-        reactRoot.render(clock);
-    }
+    reactRoot.render();
 
-    tick();
-    setInterval(tick, 1000); //Llamo a la función cada 1000 ms
+  
 
-    // ESTA NO ES LA FORMA DE HACERLO CON REACT, AUNQUE ES LO SUFICIENTEMENTE INTELIGENTE (REACT) PARA MODIFICAR SÓLO LO QUE CAMBIA.
+
+    
 </script>
 </html>
