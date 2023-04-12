@@ -37,12 +37,14 @@
         );
     }
 
-    const element =
-        <div className ="container">
+    const element = (
+        <>
+        {/*<> es lo mismo que React.Fragment*/}
             <Message name="Javi">Hello!!</Message>
             <Message name ="Javi">Goodbye!!</Message>
-        </div>;
-    
+        </>
+    );
+
     console.log('element', element);
     ReactDOM.createRoot(rootElement).render(element);
 </script>
