@@ -23,7 +23,16 @@
     const rootElement = document.getElementById('root');
     const reactRoot = ReactDOM.createRoot(rootElement); //Sacamos el create fuera pq react se queja si lo estamos creando continuamente
 
-    reactRoot.render();
+    const colors = ["Red", "Green", "Blue"]
+
+    const element = (
+        <ul>
+            {colors.map(color => (
+                <li key={color}>Soy el color {color}.</li>  //Es importante en las listas añadir una clave (key) única para cada elemento de la lista. En este ejemplo, el propio color nos vale.
+            ))}
+        </ul>
+    )
+    reactRoot.render(element);
 
   
 

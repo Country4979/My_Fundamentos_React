@@ -2,27 +2,18 @@ import classNames from 'classnames';
 //import './style.css';
 import styles from './styles.module.css';
 import { useEffect, useState } from 'react';
-import { getLatesTweets } from './service';
-import { useEffect } from 'react';
+import { getLatestTweets } from './service';
 
-/*const tweets = [
-  {content: "Nos hace mucha ilusión anunciar la fecha del ESTRENO de 'IT'",
-  userId: 1,
-  updatedAt:'',
-  id: 1,
-  },
-  {content: "Soy muy fan tuya, pero ahora no me acuerdo como te llamas",
-  userId: 2,
-  updatedAt:'',
-  id: 2,
-  }
-]*/
+const styleInline = {
+  backgroundColor: 'lightblue',
+};
+
  const TweetsPage = () => {
-    const [tweets, setTweets] = useState([]);
+    const [tweets, setTweets] = useState([]); //Guarda los datos que obtiene del endpoint. Vacío de inicio para que no falle el map.
     
     useEffect(() => {
-        getLatesTweets().then(response => setTweets(response.data));
-    },[]);
+      getLatestTweets().then(tweets => setTweets(tweets)); //Se usa then pq getLatestTweets devuelve una promesa
+    },[]);                                                          //Con el [] indicamos que se ejecute de nuevo si lo contenido del cual cree que depende useEffect ha cambiado en algo. Vacío es que no tiene dependencias => sólo se ejecuta una vez.
 
     const theme = 'dark';
     const className = classNames(

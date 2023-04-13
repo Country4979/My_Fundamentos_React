@@ -3,9 +3,9 @@ import styled from "styled-components";
 const accentColor = 'rgb(29, 161, 242)';
 
 const Button = styled.button`
-cursor: pointer;
-  background-color: ${props =>
-    props.variant === 'primary' ? accentColor : 'white'};
+  cursor: pointer;
+  background-color: 
+    ${props => props.variant === 'primary' ? accentColor : 'white'};
   border-radius: 9999px;
   border-style: solid;
   border-width: 1px;
