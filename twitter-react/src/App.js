@@ -1,5 +1,5 @@
 import TweetsPage from './components/tweets/TweetsPage';
-
+import NewTweetPage from './Layout/NewTweetPage';
 import './App.css';
 import Button from './components/shared/Button';
 import LoginPage from './components/auth/LoginPage';
@@ -14,7 +14,15 @@ function App() {
 
   return (
     <div className="App">
-      {isLogged ? <TweetsPage /> : <LoginPage onLogin={handleLogin} />}
+      {isLogged ? (
+        <>
+        <TweetsPage onLogout={handleLogout} isLogged={isLogged}/>
+        <NewTweetPage onLogout={handleLogout} isLogged={isLogged}/>
+        </>
+      ) : (
+         <LoginPage onLogin={handleLogin} />
+      )};
+
       {/* <Button variant="secondary" onClick={event => console.log(event)}>
         Click me!
       </Button>

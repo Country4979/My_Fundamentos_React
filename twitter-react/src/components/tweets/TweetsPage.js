@@ -3,12 +3,15 @@ import classNames from 'classnames';
 import styles from './styles.module.css';
 import { useEffect, useState } from 'react';
 import { getLatestTweets } from './service';
+import Button from '../shared/Button';
+import { logout } from '../auth/service';
+import Layout from '../../Layout/layout'
 
 const styleInline = {
   backgroundColor: 'lightblue',
 };
 
- const TweetsPage = () => {
+ const TweetsPage = (onLogout) => {
     const [tweets, setTweets] = useState([]); //Guarda los datos que obtiene del endpoint. Vacío de inicio para que no falle el map.
     
     useEffect(() => {
@@ -25,17 +28,27 @@ const styleInline = {
         'otherclass',
     );
 
+    const handleClick = async () => {
+      await logout();
+      onLogout();
+    };
+
   return (
-    <div 
-        //className={className}
-        className={styles.TweetsPage}
-    >
-      <ul>
-        {tweets.map(tweet => (
-          <li key={tweet.id}>{tweet.content}</li>
-        ))}
-      </ul>
-    </div>
+    <Layout title="What's going on..." {...props}>
+      <div 
+          //className={className}
+          className={styles.TweetsPage}
+      >
+        <Button onClick={onLogout}>
+          Logout!
+        </Button>
+        <ul>
+          {tweets.map(tweet => (
+            <li key={tweet.id}>{tweet.content}</li>
+          ))}
+        </ul>
+      </div>
+    </Layout>
   );
 }
 
