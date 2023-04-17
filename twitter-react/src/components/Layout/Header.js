@@ -5,6 +5,7 @@ import { logout } from '../auth/service';
 import classNames from 'classnames';
 
 import './Header.css';
+import { Link, NavLink } from 'react-router-dom';
 
 const Header = ({ className, isLogged, onLogout }) => {
   const handleLogoutClick = async () => {
@@ -14,11 +15,16 @@ const Header = ({ className, isLogged, onLogout }) => {
 
   return (
     <header className={classNames('header', className)}>
-      <div className="header-logo">
-        {/* <img src={logo} alt="twitter-react" /> */}
-        <Icon width="32" height="32" />
-      </div>
+      <Link to="/">
+        <div className="header-logo">
+          {/* <img src={logo} alt="twitter-react" /> */}
+          <Icon width="32" height="32" />
+        </div>
+      </Link>
       <nav className="header-nav">
+        <NavLink to="/tweets/new">New Tweet</NavLink> |
+        <NavLink to="/tweets" end>See latest tweets</NavLink>
+          
         {isLogged ? (
           <Button onClick={handleLogoutClick} className="header-button">
             Logout

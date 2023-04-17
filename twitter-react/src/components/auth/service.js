@@ -17,4 +17,3 @@ export const logout = () => {
     storage.remove('auth');
   });
 };
-

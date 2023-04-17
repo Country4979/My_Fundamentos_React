@@ -1,5 +1,5 @@
 import React from 'react';
-import formatDistanceToNow from 'date-fns/formatDistanceToNow';
+//import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 
 import LikeButton from './LikeButton';
 import Photo from '../shared/Photo';
@@ -16,9 +16,7 @@ const Tweet = ({ content, updatedAt, user, likes }) => {
           <span className="tweet-name">{user.name}</span>
           <span className="tweet-username">{user.username}</span>
           <span className="tweet-separator">·</span>
-          <time dateTime={updatedAt}>
-            {formatDistanceToNow(new Date(updatedAt))}
-          </time>
+          
         </div>
         <div>
           {content}
