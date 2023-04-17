@@ -1,55 +1,53 @@
 import classNames from 'classnames';
-//import './style.css';
+// import './styles.css';
 import styles from './styles.module.css';
 import { useEffect, useState } from 'react';
 import { getLatestTweets } from './service';
 import Button from '../shared/Button';
-import { logout } from '../auth/service';
-import Layout from '../../Layout/layout'
+import Layout from '../Layout/layout';
 
 const styleInline = {
   backgroundColor: 'lightblue',
 };
 
- const TweetsPage = (onLogout) => {
-    const [tweets, setTweets] = useState([]); //Guarda los datos que obtiene del endpoint. Vacío de inicio para que no falle el map.
-    
-    useEffect(() => {
-      getLatestTweets().then(tweets => setTweets(tweets)); //Se usa then pq getLatestTweets devuelve una promesa
-    },[]);                                                          //Con el [] indicamos que se ejecute de nuevo si lo contenido del cual cree que depende useEffect ha cambiado en algo. Vacío es que no tiene dependencias => sólo se ejecuta una vez.
+const TweetsPage = props => {
+  const [tweets, setTweets] = useState([]);
 
-    const theme = 'dark';
-    const className = classNames(
-        'tweetsPage',
-        {
-            light: theme === 'light',
-            dark: theme === 'dark',
-        },
-        'otherclass',
-    );
+  useEffect(() => {
+    getLatestTweets().then(tweets => setTweets(tweets));
+  }, []); //Guarda los datos que obtiene del endpoint. Vacío de inicio para que no falle el map.                                                        //Con el [] indicamos que se ejecute de nuevo si lo contenido del cual cree que depende useEffect ha cambiado en algo. Vacío es que no tiene dependencias => sólo se ejecuta una vez.
 
-    const handleClick = async () => {
-      await logout();
-      onLogout();
-    };
+  const theme = 'dark';
+  const className = classNames(
+    'tweetsPage',
+    {
+      light: theme === 'light',
+      dark: theme === 'dark',
+    },
+    'otherclass',
+  );
 
   return (
     <Layout title="What's going on..." {...props}>
-      <div 
-          //className={className}
-          className={styles.TweetsPage}
+      <div
+        //   className={className}
+        className={styles.tweetsPage}
+        //   style={{
+        //     backgroundColor: theme === 'light' ? 'lightblue' : 'darkblue',
+        //   }}
       >
-        <Button onClick={onLogout}>
-          Logout!
-        </Button>
-        <ul>
-          {tweets.map(tweet => (
-            <li key={tweet.id}>{tweet.content}</li>
-          ))}
-        </ul>
+         {!!tweets.length ? (
+          <ul>
+            {tweets.map(tweet => (
+              <li key={tweet.id}>{tweet.content}</li>
+            ))}
+          </ul>
+        ) : (
+          <Button>Be the first one...</Button>
+        )}
       </div>
     </Layout>
   );
-}
+};
 
 export default TweetsPage;

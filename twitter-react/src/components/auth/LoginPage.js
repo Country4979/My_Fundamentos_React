@@ -7,9 +7,9 @@ function LoginPage({ onLogin }) {
 
     //Con esto controlamos los imputs desde el estado
     const [credentials, setCredentials] = useState({
-    username: '',
-    password: '',
-  });
+        username: '',
+        password: '',
+      });
 
   const handleSubmit = async event => {
         event.preventDefault(credentials);         //No recarga la página, que es lo que hace por defecto
@@ -29,38 +29,43 @@ function LoginPage({ onLogin }) {
             setCredentials({ ...credentials, password: event.target.value})
         }
         */
-       setCredentials({
-         ...credentials,
-         [event.target.name]: event.target.value
+        setCredentials({
+            ...credentials,
+            [event.target.name]: event.target.value,
         });   //Es lo miso que arriba, pero de forma más dinámica
     };
 
     const buttonDisabled = !credentials.username || !credentials.password; //Habilita que aparezca el botón
     
-    return <div>
-        <h1>Log in to Twitter</h1>
-        <form onSubmit={handleSubmit}>
+    return (
+        <div>
+            <h1>Log in to Twitter</h1>
+            <form onSubmit={handleSubmit}>
             <input
                 type="text"
                 name="username"
                 onChange={handleChange}
                 value={credentials.username}    //Controlamos desde el estado y lo sincronizamos en pantalla
-            />
+                />
             <input
                 type="password"
                 name="password"
                 onChange={handleChange}
                 value={credentials.password}
-            />   
-            <Button
-                type="submit"
-                variant="primary"
-                disabled={buttonDisabled}
-            >
+            />
+            <Button type="submit" variant="primary" disabled={buttonDisabled}>
                 Log in
             </Button>
-        </form>
-    </div>
+            <input
+                type="file"
+                name="photo"
+                onChange={event => {
+                console.log(event.target.files[0]);
+                }}
+            />
+            </form>
+        </div>
+    );
 };
 
 export default LoginPage
