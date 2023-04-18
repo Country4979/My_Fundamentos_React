@@ -5,19 +5,37 @@ import FormField from '../shared/FormField';
 import { login } from './service';
 
 import './LoginPage.css';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 function LoginPage({ onLogin }) {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState(null)
   const [credentials, setCredentials] = useState({
     username: '',
     password: '',
   });
-
+const resetError = () => {setError(null)}
   const handleSubmit = async event => {
     event.preventDefault();
-    await login(credentials);
+    
+    setIsLoading(true);
+    try {
+      await login(credentials);
+    } catch (error) {
+      setError(error);
+      return;
+    }
 
     // Logged in
+    
     onLogin();
+
+    // Redirect to // Lo hacemos así por las reglas del Hooks
+    const to = location.state?.from?.pathname || '/';  //Recuperamos el pathname desde el state de location en RequireAuth. Si falla alguno de los pasos no sigue evaluando y manda al home
+    navigate(to)
   };
 
   const handleChange = event => {
@@ -27,7 +45,8 @@ function LoginPage({ onLogin }) {
     });
   };
 
-  const buttonDisabled = !credentials.username || !credentials.password;
+  const buttonDisabled =
+    isLoading || !credentials.username || !credentials.password;
 
   return (
     <div className="loginPage">
@@ -65,6 +84,7 @@ function LoginPage({ onLogin }) {
           }}
         /> */}
       </form>
+      {error && <div className="loginPage-error" onClick={resetError}>{error.message}</div>}
     </div>
   );
 }

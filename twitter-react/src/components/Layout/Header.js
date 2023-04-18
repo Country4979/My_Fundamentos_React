@@ -30,9 +30,9 @@ const Header = ({ className, isLogged, onLogout }) => {
             Logout
           </Button>
         ) : (
-          <Button variant="primary" className="header-button">
+          <Link as={Button} to="/login" variant="primary" className="header-button">
             Login
-          </Button>
+          </Link>
         )}
       </nav>
     </header>
