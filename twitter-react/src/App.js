@@ -14,15 +14,15 @@ function App({ isInitiallyLogged }) {
       <AuthContextProvider isInitiallyLogged={isInitiallyLogged}>
         <Routes>
           <Route path="/login"
-            element ={<LoginPage onLogin={handleLogin} />} />
+            element ={<LoginPage />} />
           <Route path="/tweets"
-            element={<TweetsPage onLogout={handleLogout} isLogged={isLogged} />} />
+            element={<TweetsPage />} />
           <Route path="/tweets/:tweetId"
-            element={<TweetPage onLogout={handleLogout} isLogged={isLogged} />} />
+            element={<TweetPage />} />
           <Route path="tweets/new"
             element={
-              <RequireAuth isLogged={isLogged}>
-                <NewTweetPage onLogout={handleLogout} isLogged={isLogged} />
+              <RequireAuth>
+                <NewTweetPage />
               </RequireAuth>
               }
           />

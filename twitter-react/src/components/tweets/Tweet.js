@@ -16,7 +16,10 @@ const Tweet = ({ content, updatedAt, user, likes }) => {
           <span className="tweet-name">{user.name}</span>
           <span className="tweet-username">{user.username}</span>
           <span className="tweet-separator">·</span>
-          
+          <time dateTime={updatedAt}>
+            {//formatDistanceToNow(new Date(updatedAt))
+            }
+          </time>
         </div>
         <div>
           {content}

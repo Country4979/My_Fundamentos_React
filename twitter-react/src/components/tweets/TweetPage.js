@@ -1,12 +1,14 @@
-import { useParams } from "react-router-dom"
-import Layout from "../layout/Layout"
-import { useEffect, useState } from "react";
-import { getTweet } from "./service";
+import { Navigate, useNavigate, useParams } from 'react-router-dom';
+import Layout from '../layout/Layout';
+import { useEffect, useState } from 'react';
+import { getTweet } from './service';
 
 const TweetPage = (props)  => {
     const params = useParams();
+    const navigate = useNavigate();
     const [tweet, setTweet] = useState(null) //Guardo el tweet en el estado
     const [error, setError] = useState(null)
+
     useEffect (() => {
         getTweet(params.tweetId)
         .then(tweet => setTweet(tweet))
@@ -23,11 +25,9 @@ const TweetPage = (props)  => {
     }*/
 
     //Podemos poner un loading para cuando el State es null, pq se va a mostrar siempre
-    return (
-        <Layout title="Tweet Detail" {...props}>
-            {tweet && <div>{tweet.content}</div>} 
-        </Layout>
-    )
-}
+  return (
+    <Layout title="Tweet detail">{tweet && <div>{tweet.content}</div>}</Layout>
+  );
+};
 
 export default TweetPage

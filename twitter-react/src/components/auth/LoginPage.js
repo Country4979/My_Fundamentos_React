@@ -6,10 +6,20 @@ import { login } from './service';
 
 import './LoginPage.css';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useAuth } from './context';
+import { useRef } from 'react';
+import { useEffect } from 'react';
 
-function LoginPage({ onLogin }) {
+function LoginPage() {
+  const { onLogin } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+  const renders = useRef(0);
+  
+  useEffect(() => {
+    renders.current++;
+    console.log(renders.current, ' times rendered');
+  });
 
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState(null)
@@ -17,25 +27,26 @@ function LoginPage({ onLogin }) {
     username: '',
     password: '',
   });
-const resetError = () => {setError(null)}
+
+  const resetError = () => {setError(null)}
+
   const handleSubmit = async event => {
     event.preventDefault();
     
+    resetError();
     setIsLoading(true);
     try {
       await login(credentials);
+      setIsLoading(false);
+      // Logged in
+      onLogin();
+      // Redirect to // Lo hacemos así por las reglas del Hooks
+      const to = location.state?.from?.pathname || '/';  //Recuperamos el pathname desde el state de location en RequireAuth. Si falla alguno de los pasos no sigue evaluando y manda al home
+      navigate(to)
     } catch (error) {
       setError(error);
-      return;
+      setIsLoading(false);
     }
-
-    // Logged in
-    
-    onLogin();
-
-    // Redirect to // Lo hacemos así por las reglas del Hooks
-    const to = location.state?.from?.pathname || '/';  //Recuperamos el pathname desde el state de location en RequireAuth. Si falla alguno de los pasos no sigue evaluando y manda al home
-    navigate(to)
   };
 
   const handleChange = event => {
@@ -59,6 +70,7 @@ const resetError = () => {setError(null)}
           className="loginForm-field"
           onChange={handleChange}
           value={credentials.username}
+          autofocus
         />
         <FormField
           type="password"
@@ -84,7 +96,11 @@ const resetError = () => {setError(null)}
           }}
         /> */}
       </form>
-      {error && <div className="loginPage-error" onClick={resetError}>{error.message}</div>}
+      {error && (
+        <div onClick={resetError} className="loginPage-error">
+          {error.message}
+        </div>
+      )}
     </div>
   );
 }
